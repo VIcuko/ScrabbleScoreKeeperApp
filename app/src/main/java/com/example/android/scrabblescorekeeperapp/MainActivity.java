@@ -5,15 +5,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     //  Tracks score for Team A
-    int scoreTeamA = 0;
+    int eagleScore = 0;
 
     //  Tracks score for Team B
-    int scoreTeamB = 0;
+    int sharkScore = 0;
 
     // Assigns values to letters in game
     String[] value_of_letters = {" ","eaionrtlsu","dg","bcmp","fhvwy","k","","","jx","","qz"};
+
+    BufferedReader word_list = new InputStreamReader(getAssets().open(""));
+    String str;
+
+    List<String> list = new ArrayList<String>();
+    while((str = word_list.readLine()) != null){
+        list.add(str);
+    };
+
+    String[] stringArr = list.toArray(new String[0]);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,41 +70,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Increase the score of Team A by 2.
-     */
-    public void twoPointsTeamA(View view) {
-        scoreTeamA += 2;
-        displayForTeamA(scoreTeamA);
-    }
-
-    /**
-     * Increase the score of Team B by 2.
-     */
-    public void twoPointsTeamB(View view) {
-        scoreTeamB += 2;
-        displayForTeamB(scoreTeamB);
-    }
-
-    /**
-     * Increase the score of Team A by 1.
-     */
-    public void onePointTeamA(View view) {
-        scoreTeamA += 1;
-        displayForTeamA(scoreTeamA);
-    }
-
-    /**
-     * Increase the score of Team B by 1.
-     */
-    public void onePointTeamB(View view) {
-        scoreTeamB += 1;
-        displayForTeamB(scoreTeamB);
-    }
-
-    /**
      * Reset the result for both teams.
      */
-    public void resetResult(View view) {
+    public void newGame(View view) {
         scoreTeamA = 0;
         scoreTeamB = 0;
         displayForTeamA(scoreTeamA);

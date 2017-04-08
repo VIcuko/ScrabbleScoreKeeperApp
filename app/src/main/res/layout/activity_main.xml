@@ -35,7 +35,7 @@
                 android:layout_marginBottom="16dp"/>
 
             <TextView
-                android:id="@+id/team_a_score"
+                android:id="@+id/eagle_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -95,7 +95,7 @@
                 android:layout_marginBottom="16dp"/>
 
             <TextView
-                android:id="@+id/team_b_score"
+                android:id="@+id/shark_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -162,14 +162,14 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/team_a_score"
+                android:id="@+id/eagle_previous_words"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="sans-serif-light"
                 android:scrollbars="vertical"
-                android:text="None yet!\n Hello \n Hello \n Hello \n Hello"
+                android:text="None yet!"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -199,11 +199,11 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/team_a_score"
+                android:id="@+id/shark_previous_words"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="None yet!\n Hello \n Hello \n Hello \n Hello"
+                android:text="None yet!"
                 android:textSize="14sp"
                 android:textColor="#000000"
                 android:fontFamily="sans-serif-light"
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:onClick="resetResult"
+            android:onClick="newGame"
             android:text="New Game" />
 
     </RelativeLayout>
