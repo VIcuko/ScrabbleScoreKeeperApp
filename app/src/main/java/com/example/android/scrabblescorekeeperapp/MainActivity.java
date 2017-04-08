@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     // Assigns values to letters in game
     String[] value_of_letters = {" ","eaionrtlsu","dg","bcmp","fhvwy","k","","","jx","","qz"};
 
-    BufferedReader word_list = new InputStreamReader(getAssets().open(""));
+    BufferedReader word_list = new BufferedReader(new FileReader("assets/english_dictionary.txt"));
     String str;
 
     List<String> list = new ArrayList<String>();
