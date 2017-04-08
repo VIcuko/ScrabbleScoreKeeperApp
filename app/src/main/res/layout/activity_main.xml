@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Team A"
+                android:text="Player Eagle"
                 android:textSize="14sp"
                 android:textColor="#616161"
                 android:fontFamily="sans-serif-medium"
@@ -45,27 +45,19 @@
                 android:fontFamily="sans-serif-light"
                 android:layout_marginBottom="24dp"/>
 
-            <Button
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/eagle_word"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:onClick="threePointsTeamA"
-                android:text="+3 points"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp" />
+                android:gravity="center"
+                android:hint="Dance"
+                android:inputType="text" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="twoPointsTeamA"
-                android:text="+2 points"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onePointTeamA"
-                android:text="Free throw"
+                android:onClick="addPointsEagle"
+                android:text="Add Points"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp" />
 
@@ -86,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Team B"
+                android:text="Player Shark"
                 android:textSize="14sp"
                 android:textColor="#616161"
                 android:fontFamily="sans-serif-medium"
@@ -103,30 +95,21 @@
                 android:fontFamily="sans-serif-light"
                 android:layout_marginBottom="24dp"/>
 
+            <EditText
+                android:id="@+id/shark_word"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="Sing"
+                android:inputType="text" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="threePointsTeamB"
-                android:text="+3 points"
+                android:onClick="addPointsShark"
+                android:text="Add Points"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="twoPointsTeamB"
-                android:text="+2 points"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onePointTeamB"
-                android:text="Free throw"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="16dp"/>
 
         </LinearLayout>
 

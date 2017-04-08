@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
     //  Tracks score for Team B
     int scoreTeamB = 0;
 
+    // Assigns values to letters in game
+    String[] value_of_letters = {" ","eaionrtlsu","dg","bcmp","fhvwy","k","","","jx","","qz"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
