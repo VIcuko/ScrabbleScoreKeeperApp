@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         eagleScoreDisplay = (TextView) findViewById(R.id.eagle_score);
-        sharkScoreDisplay = (TextView) findViewById(R.id.eagle_score);
+        sharkScoreDisplay = (TextView) findViewById(R.id.shark_score);
         eaglePreviousWords = (TextView) findViewById(R.id.eagle_previous_words);
         sharkPreviousWords = (TextView) findViewById(R.id.shark_previous_words);
         eagleNextWord = (EditText) findViewById(R.id.eagle_word);
@@ -232,14 +232,18 @@ public class MainActivity extends AppCompatActivity {
             previous_words_display.setText(introduced_word.toLowerCase()+"\n"+previous_words_display.getText().toString());
         };
     };
+
+    public void clearPreviousWords(TextView previous_words_display){
+        previous_words_display.setText("None yet!");
+    }
     /**
      * Reset the result for both teams.
      */
     public void newGame(View view) {
         displayScore(eagleScoreDisplay,0);
         displayScore(sharkScoreDisplay,0);
-        displayPreviousWords("None yet!",eaglePreviousWords);
-        displayPreviousWords("None yet!",sharkPreviousWords);
+        clearPreviousWords(eaglePreviousWords);
+        clearPreviousWords(sharkPreviousWords);
     }
 
 }
