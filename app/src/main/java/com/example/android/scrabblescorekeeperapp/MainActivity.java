@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPointsEagle(View view){
-        updatePoints(eagleScoreDisplay,eagleNextWord.toString(), eaglePreviousWords);
+        updatePoints(eagleScoreDisplay,eagleNextWord.getText().toString(), eaglePreviousWords);
     };
 
     public void addPointsShark(View view){
-        updatePoints(sharkScoreDisplay,sharkNextWord.toString(), sharkPreviousWords);
+        updatePoints(sharkScoreDisplay,sharkNextWord.getText().toString(), sharkPreviousWords);
     };
 
     /**
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (validateWordInDictionary(introduced_word)){
             int points = calculatePoints(introduced_word);
-            new_score = Integer.parseInt(score_display.toString()) + points;
+            new_score = Integer.parseInt(score_display.getText().toString()) + points;
             message = "Woohoo!!\nYou added " + points + " points";
         }
 
@@ -151,30 +151,43 @@ public class MainActivity extends AppCompatActivity {
 
         int lower_limit = 0;
         int higher_limit = word_dictionary.length;
-        int compared_string_position = lower_limit + (higher_limit-lower_limit)/2;
-        String compared_string = word_dictionary[compared_string_position];
+        int compared_string_position;
+        String compared_string;
         boolean word_found = false;
         boolean end_loop = false;
 
-        if (lower_limit<=higher_limit){
-            end_loop = true;
-        }
+        while (end_loop==false) {
+            compared_string_position = lower_limit + (higher_limit-lower_limit)/2;
+            compared_string = word_dictionary[compared_string_position].toUpperCase();
 
-        else {
-               int comparison = eagleNextWord.compareTo(compared_string);
-            if (comparison < 0) {
-                higher_limit = compared_string_position;
+            if (higher_limit-lower_limit<=1) {
+                if (introduced_word.compareTo(word_dictionary[higher_limit])==0 || introduced_word.compareTo(word_dictionary[lower_limit])==0){
+                    word_found = true;
+                    end_loop = true;
+                }
+
+                else {
+                    end_loop = true;
+                };
             }
 
-            else if (comparison > 0){
-                lower_limit = compared_string_position;
-            }
+            else {
+                int comparison = introduced_word.compareToIgnoreCase(compared_string);
 
-            else if (comparison == 0){
-                word_found = true;
-                end_loop = true;
+                if (comparison < 0) {
+                    higher_limit = compared_string_position;
+                }
+
+                else if (comparison > 0) {
+                    lower_limit = compared_string_position;
+                }
+
+                else if (comparison == 0) {
+                    word_found = true;
+                    end_loop = true;
+                };
+
             };
-
         };
 
         return word_found;
@@ -207,12 +220,12 @@ public class MainActivity extends AppCompatActivity {
      * @param introduced_word word introduced by user in EditText field
      */
     public void displayPreviousWords(String introduced_word, TextView previous_words_display){
-        if (previous_words_display.toString()=="None yet!"){
+        if (previous_words_display.getText().toString()=="None yet!"){
             previous_words_display.setText(introduced_word);
         }
         else{
 
-            previous_words_display.setText("introduced_word\n"+previous_words_display.toString());
+            previous_words_display.setText("introduced_word\n"+previous_words_display.getText().toString());
         };
     };
     /**
