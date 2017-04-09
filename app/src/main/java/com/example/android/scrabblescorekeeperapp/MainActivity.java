@@ -109,14 +109,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPointsEagle(View view){
-        eagle_score = eagle_score + getPoints(eagle_score ,eagleNextWord, eaglePreviousWords);
+        int new_points = getPoints(eagle_score ,eagleNextWord, eaglePreviousWords);
+        eagle_score = eagle_score + new_points;
         displayScore(eagleScoreDisplay,eagle_score);
+        displayPreviousWords(eagleNextWord.getText().toString()+" ("+new_points+")", eaglePreviousWords);
         eagleNextWord.setText("");
-        displayPreviousWords(introduced_word+" ("+points+")", previous_words_list);
     };
 
     public void addPointsShark(View view){
-        shark_score = getPoints(sharkScoreDisplay,shark_score, sharkNextWord, sharkPreviousWords);
+        int new_points = getPoints(shark_score ,sharkNextWord, sharkPreviousWords);
+        shark_score = shark_score + new_points;
+        displayScore(sharkScoreDisplay,shark_score);
+        displayPreviousWords(sharkNextWord.getText().toString()+" ("+new_points+")", sharkPreviousWords);
+        sharkNextWord.setText("");
     };
 
     /**
