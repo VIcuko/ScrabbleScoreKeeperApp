@@ -66,7 +66,6 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_undo_black_24dp"
                 android:onClick="undoEagle"
-                android:text="Undo Last Play"
                 android:layout_gravity="right"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp" />
@@ -126,7 +125,6 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_undo_black_24dp"
                 android:onClick="undoShark"
-                android:text="Undo Last Play"
                 android:layout_gravity="right"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp" />

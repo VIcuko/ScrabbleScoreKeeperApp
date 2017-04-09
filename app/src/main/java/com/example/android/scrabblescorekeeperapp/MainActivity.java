@@ -13,19 +13,24 @@ import java.lang.reflect.Array;
 
 import static android.R.id.message;
 import static android.view.View.Z;
+import static com.example.android.scrabblescorekeeperapp.R.id.shark_score;
 
 public class MainActivity extends AppCompatActivity {
     //  Tracks score for Player Eagle
     private TextView eagleScoreDisplay;
+    int eagle_score = 0;
 
     //  Tracks score for Player Shark
     private TextView sharkScoreDisplay;
+    int shark_score = 0;
 
     // Tracks the previous used words for Player Eagle
     private TextView eaglePreviousWords;
+    String eagle_previous_words;
 
     // Tracks the previous used words for Player Shark
     private TextView sharkPreviousWords;
+    String shark_previous_words;
 
     // Receives input for next word from user
     private EditText eagleNextWord;
@@ -50,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         sharkPreviousWords = (TextView) findViewById(R.id.shark_previous_words);
         eagleNextWord = (EditText) findViewById(R.id.eagle_word);
         sharkNextWord = (EditText) findViewById(R.id.shark_word);
-        displayScore(eagleScoreDisplay,0);
-        displayScore(sharkScoreDisplay,0);
+        displayScore(eagleScoreDisplay,eagle_score);
+        displayScore(sharkScoreDisplay,shark_score);
         loadDictionary();
     }
 
@@ -104,20 +109,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPointsEagle(View view){
-        updatePoints(eagleScoreDisplay,eagleNextWord, eaglePreviousWords);
+        eagle_score = eagle_score + getPoints(eagle_score ,eagleNextWord, eaglePreviousWords);
+        displayScore(eagleScoreDisplay,eagle_score);
+        eagleNextWord.setText("");
+        displayPreviousWords(introduced_word+" ("+points+")", previous_words_list);
     };
 
     public void addPointsShark(View view){
-        updatePoints(sharkScoreDisplay,sharkNextWord, sharkPreviousWords);
+        shark_score = getPoints(sharkScoreDisplay,shark_score, sharkNextWord, sharkPreviousWords);
     };
 
     /**
      * Increase the score of Player Eagle.
      */
-    public void updatePoints(TextView score_display, EditText textfield, TextView previous_words_display) {
-        String introduced_word = textfield.getText().toString();
+    public int getPoints(int current_score, EditText text_field, TextView previous_words_list) {
+        String introduced_word = text_field.getText().toString();
         String message;
-        int new_score = 0;
         int points = 0;
 
         if (introduced_word.equals(null) ||
@@ -127,23 +134,14 @@ public class MainActivity extends AppCompatActivity {
 
         else if (validateWordInDictionary(introduced_word)){
             points = calculatePoints(introduced_word);
-            new_score = Integer.parseInt(score_display.getText().toString()) + points;
             message = "Woohoo!!\nYou added " + points + " points";
         }
 
         else {
             message = "Sorry, it seems that word isn't in the Dictionary";
         };
-
-        if (new_score<=0) {
-            //Enseñar solo el mensaje
-        }
-        else {
-            //Enseñar mensaje
-            displayScore(score_display,new_score);
-            textfield.setText("");
-            displayPreviousWords(introduced_word+" ("+points+")", previous_words_display);
-        };
+        //Mostrar correspondiente mensaje
+        return points;
     }
 
     /**
@@ -233,8 +231,19 @@ public class MainActivity extends AppCompatActivity {
         };
     };
 
-    public void clearPreviousWords(TextView previous_words_display){
-        previous_words_display.setText("None yet!");
+    /**
+     * This method clears the list of previous words and leaves the phrase "None yet!" instead
+     * @param previous_words_list TextView with list of previous words
+     */
+    public void clearPreviousWords(TextView previous_words_list){
+        previous_words_list.setText("None yet!");
+    }
+
+    public void undoLastWord(TextView previous_words_list, TextView score){
+        int current_points = Integer.parseInt(score.getText().toString());
+        String last_line = previous_words_list.getText().toString().split("\n")[0];
+        int previous_points = Integer.parseInt(Character.toString(last_line.charAt(last_line.length()-1)));
+
     }
     /**
      * Reset the result for both teams.
