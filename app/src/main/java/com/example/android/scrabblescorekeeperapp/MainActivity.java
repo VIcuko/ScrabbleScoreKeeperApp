@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 
+import static android.R.id.message;
 import static android.view.View.Z;
 
 public class MainActivity extends AppCompatActivity {
@@ -103,19 +104,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPointsEagle(View view){
-        updatePoints(eagleScoreDisplay,eagleNextWord.getText().toString(), eaglePreviousWords);
+        updatePoints(eagleScoreDisplay,eagleNextWord, eaglePreviousWords);
     };
 
     public void addPointsShark(View view){
-        updatePoints(sharkScoreDisplay,sharkNextWord.getText().toString(), sharkPreviousWords);
+        updatePoints(sharkScoreDisplay,sharkNextWord, sharkPreviousWords);
     };
 
     /**
      * Increase the score of Player Eagle.
      */
-    public void updatePoints(TextView score_display, String introduced_word, TextView previous_words_display) {
+    public void updatePoints(TextView score_display, EditText textfield, TextView previous_words_display) {
+        String introduced_word = textfield.getText().toString();
         String message;
         int new_score = 0;
+        int points = 0;
 
         if (introduced_word.equals(null) ||
                 introduced_word.equals("") || introduced_word.matches("[^a-zA-Z]")) {
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (validateWordInDictionary(introduced_word)){
-            int points = calculatePoints(introduced_word);
+            points = calculatePoints(introduced_word);
             new_score = Integer.parseInt(score_display.getText().toString()) + points;
             message = "Woohoo!!\nYou added " + points + " points";
         }
@@ -138,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
         else {
             //Enseñar mensaje
             displayScore(score_display,new_score);
-            displayPreviousWords(introduced_word, previous_words_display);
+            textfield.setText("");
+            displayPreviousWords(introduced_word+" ("+points+")", previous_words_display);
         };
     }
 
@@ -220,12 +224,12 @@ public class MainActivity extends AppCompatActivity {
      * @param introduced_word word introduced by user in EditText field
      */
     public void displayPreviousWords(String introduced_word, TextView previous_words_display){
-        if (previous_words_display.getText().toString()=="None yet!"){
-            previous_words_display.setText(introduced_word);
+        if (previous_words_display.getText().toString().contains("None yet!")){
+            previous_words_display.setText(introduced_word.toLowerCase());
         }
         else{
 
-            previous_words_display.setText("introduced_word\n"+previous_words_display.getText().toString());
+            previous_words_display.setText(introduced_word.toLowerCase()+"\n"+previous_words_display.getText().toString());
         };
     };
     /**
