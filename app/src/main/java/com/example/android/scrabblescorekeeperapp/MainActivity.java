@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Method to search the dictionary and validate if the word exists
      * @param introduced_word word introduced by user in EditText field
      */
     public boolean validateWordInDictionary(String introduced_word){
@@ -172,22 +172,30 @@ public class MainActivity extends AppCompatActivity {
         return word_found;
     };
 
-    /**
-     * Increase the score of Player Shark.
-     */
-    public void threePointsTeamB(View view) {
-        sharkScore += 3;
-        displayForShark(sharkScore);
-    }
+    public int calculatePoints(String introduced_word){
+        int points = 0;
+        String[] introduced_letters = introduced_word.split("");
+
+        for (int i=0; i<introduced_letters.length; i++){
+
+            for (int j=0; j<value_of_letters.length; j++){
+              if (value_of_letters[j].contains(introduced_letters[i])){
+                  points = points + j;
+                  break;
+              };
+          };
+        };
+
+        return points;
+    };
 
     /**
      * Reset the result for both teams.
      */
     public void newGame(View view) {
-        eagleScore = 0;
-        sharkScore = 0;
-        displayForEagle(eagleScore);
-        displayForShark(sharkScore);
+        displayScore(eagleScoreDisplay,0);
+        displayScore(sharkScoreDisplay,0);
+
     }
 
 }
