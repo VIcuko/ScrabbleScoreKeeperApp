@@ -136,13 +136,15 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      *
-     * @param introduced_word
+     * @param introduced_word word introduced by user in EditText field
      */
     public boolean validateWordInDictionary(String introduced_word){
         String word_to_validate = introduced_word.toUpperCase();
 
         int lower_limit = 0;
-        int higher_limit = (word_dictionary.length-1)/2;
+        int higher_limit = word_dictionary.length;
+        int compared_string_position = lower_limit + (higher_limit-lower_limit)/2;
+        String compared_string = word_dictionary[compared_string_position];
         boolean word_found = false;
         boolean end_loop = false;
 
@@ -151,10 +153,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else {
-                eagleNextWord.compareTo(word_dictionary[lower_limit]);
+               int comparison = eagleNextWord.compareTo(compared_string);
+            if (comparison < 0) {
+                higher_limit = compared_string_position;
+            }
+
+            else if (comparison > 0){
+                lower_limit = compared_string_position;
+            }
+
+            else if (comparison == 0){
+                word_found = true;
+                end_loop = true;
             };
-        return word_found;
+
         };
+
+        return word_found;
+    };
 
     /**
      * Increase the score of Player Shark.
