@@ -1,6 +1,7 @@
 package com.example.android.scrabblescorekeeperapp;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -180,7 +181,12 @@ public class MainActivity extends AppCompatActivity {
         else {
             message = "Sorry, it seems that word isn't in the Dictionary";
         };
-        //Mostrar correspondiente mensaje
+
+        AlertDialog.Builder aviso = new AlertDialog.Builder(this);
+        aviso.setMessage(message);
+        AlertDialog dialog = aviso.create();
+        aviso.show();
+
         return points;
     }
 
