@@ -116,11 +116,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public void addPointsEagle(View view){
         int new_points = getPoints(eagle_score ,eagleNextWord, eaglePreviousWords);
-        eagle_score = eagle_score + new_points;
-        displayScore(eagleScoreDisplay,eagle_score);
-        eagle_previous_words = updatePreviousWords(eagle_previous_words, eagleNextWord.getText().toString()+" ("+new_points+")");
-        displayPreviousWords(eaglePreviousWords, eagle_previous_words);
-        eagleNextWord.setText("");
+        if (new_points>0) {
+            eagle_score = eagle_score + new_points;
+            displayScore(eagleScoreDisplay, eagle_score);
+            eagle_previous_words = updatePreviousWords(eagle_previous_words, eagleNextWord.getText().toString() + " (" + new_points + ")");
+            displayPreviousWords(eaglePreviousWords, eagle_previous_words);
+            eagleNextWord.setText("");
+        };
     };
 
     /**
@@ -128,11 +130,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public void addPointsShark(View view){
         int new_points = getPoints(shark_score ,sharkNextWord, sharkPreviousWords);
-        shark_score = shark_score + new_points;
-        displayScore(sharkScoreDisplay,shark_score);
-        shark_previous_words = updatePreviousWords(shark_previous_words, sharkNextWord.getText().toString()+" ("+new_points+")");
-        displayPreviousWords(sharkPreviousWords, shark_previous_words);
-        sharkNextWord.setText("");
+        if (new_points>0) {
+            shark_score = shark_score + new_points;
+            displayScore(sharkScoreDisplay, shark_score);
+            shark_previous_words = updatePreviousWords(shark_previous_words, sharkNextWord.getText().toString() + " (" + new_points + ")");
+            displayPreviousWords(sharkPreviousWords, shark_previous_words);
+            sharkNextWord.setText("");
+        };
     };
 
     public void undoLastPlayEagle(View view){
@@ -311,9 +315,11 @@ public class MainActivity extends AppCompatActivity {
             previous_points_int = 0;
         }
         else {
-            String last_line = previous_words_list.split("\n")[0];
-            char previous_points_char = last_line.charAt(last_line.length() - 2);
-            previous_points_int = Integer.parseInt(Character.toString(previous_points_char));
+            String last_line = previous_words_list.split("\n")[0].split("\\(")[1];
+            String previous_points_str = last_line.substring(0,last_line.length()-1);
+            previous_points_int = Integer.parseInt(previous_points_str);
+//            char previous_points_char = last_line.charAt(last_line.length() - 2);
+//            previous_points_int2 = Integer.parseInt(Character.toString(previous_points_char));
         }
         return previous_points_int;
     };
