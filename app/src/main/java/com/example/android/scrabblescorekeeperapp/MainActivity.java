@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView sharkPreviousWords;
 
     // Receives input for next word from user
-    private String eagleNextWord;
+    private EditText eagleNextWord;
 
     // Receives input for next word from user
-    private String sharkNextWord;
+    private EditText sharkNextWord;
 
     // Assigns values to letters in game
     String[] value_of_letters = {" ","eaionrtlsu","dg","bcmp","fhvwy","k","","","jx","","qz"};
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         sharkScoreDisplay = (TextView) findViewById(R.id.eagle_score);
         eaglePreviousWords = (TextView) findViewById(R.id.eagle_previous_words);
         sharkPreviousWords = (TextView) findViewById(R.id.shark_previous_words);
-        eagleNextWord = ((EditText) findViewById(R.id.eagle_word)).toString();
-        sharkNextWord = ((EditText) findViewById(R.id.shark_word)).toString();
+        eagleNextWord = (EditText) findViewById(R.id.eagle_word);
+        sharkNextWord = (EditText) findViewById(R.id.shark_word);
         displayScore(eagleScoreDisplay,0);
         displayScore(sharkScoreDisplay,0);
         loadDictionary();
@@ -102,11 +102,18 @@ public class MainActivity extends AppCompatActivity {
         textview.setText(String.valueOf(score));
     }
 
+    public void addPointsEagle(View view){
+        updatePoints(eagleScoreDisplay,eagleNextWord.toString(), eaglePreviousWords);
+    };
+
+    public void addPointsShark(View view){
+        updatePoints(sharkScoreDisplay,sharkNextWord.toString(), sharkPreviousWords);
+    };
 
     /**
      * Increase the score of Player Eagle.
      */
-    public void addPoints(TextView score_display, String introduced_word) {
+    public void updatePoints(TextView score_display, String introduced_word, TextView previous_words_display) {
         String message;
         int new_score = 0;
 
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             message = "Sorry, but it seems the word you introduced has invalid characters";
         }
 
-        else if (validateWordInDictionary(eagleNextWord)){
+        else if (validateWordInDictionary(introduced_word)){
             int points = calculatePoints(introduced_word);
             new_score = Integer.parseInt(score_display.toString()) + points;
             message = "Woohoo!!\nYou added " + points + " points";
@@ -131,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             //Enseñar mensaje
             displayScore(score_display,new_score);
+            displayPreviousWords(introduced_word, previous_words_display);
         };
     }
 
@@ -172,6 +180,11 @@ public class MainActivity extends AppCompatActivity {
         return word_found;
     };
 
+    /**
+     * This method calculates the points to be added for the word introduced by the user
+     * @param introduced_word word introduced by user in EditText field
+     * @return amount of points for the indicated word
+     */
     public int calculatePoints(String introduced_word){
         int points = 0;
         String[] introduced_letters = introduced_word.split("");
@@ -190,12 +203,26 @@ public class MainActivity extends AppCompatActivity {
     };
 
     /**
+     * This method includes the word introduced into the displayed list of previous words
+     * @param introduced_word word introduced by user in EditText field
+     */
+    public void displayPreviousWords(String introduced_word, TextView previous_words_display){
+        if (previous_words_display.toString()=="None yet!"){
+            previous_words_display.setText(introduced_word);
+        }
+        else{
+
+            previous_words_display.setText("introduced_word\n"+previous_words_display.toString());
+        };
+    };
+    /**
      * Reset the result for both teams.
      */
     public void newGame(View view) {
         displayScore(eagleScoreDisplay,0);
         displayScore(sharkScoreDisplay,0);
-
+        displayPreviousWords("None yet!",eaglePreviousWords);
+        displayPreviousWords("None yet!",sharkPreviousWords);
     }
 
 }
