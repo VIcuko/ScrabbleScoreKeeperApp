@@ -182,10 +182,10 @@ public class MainActivity extends AppCompatActivity {
             message = "Sorry, it seems that word isn't in the Dictionary";
         };
 
-        AlertDialog.Builder aviso = new AlertDialog.Builder(this);
-        aviso.setMessage(message);
-        AlertDialog dialog = aviso.create();
-        aviso.show();
+        AlertDialog.Builder pop_up = new AlertDialog.Builder(this);
+        pop_up.setMessage(message);
+        AlertDialog dialog = pop_up.create();
+        pop_up.show();
 
         return points;
     }
