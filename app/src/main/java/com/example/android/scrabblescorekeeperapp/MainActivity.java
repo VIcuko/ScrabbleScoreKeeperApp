@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     // Assigns values to letters in game
     String[] value_of_letters = {" ","eaionrtlsu","dg","bcmp","fhvwy","k","","","jx","","qz"};
 
-    //
+    // Generate the string where the dictionary will be stored
     String[] word_dictionary;
 
 
@@ -324,8 +324,6 @@ public class MainActivity extends AppCompatActivity {
             String last_line = previous_words_list.split("\n")[0].split("\\(")[1];
             String previous_points_str = last_line.substring(0,last_line.length()-1);
             previous_points_int = Integer.parseInt(previous_points_str);
-//            char previous_points_char = last_line.charAt(last_line.length() - 2);
-//            previous_points_int2 = Integer.parseInt(Character.toString(previous_points_char));
         }
         return previous_points_int;
     };
